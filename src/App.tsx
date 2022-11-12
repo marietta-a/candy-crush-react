@@ -195,12 +195,13 @@ function App() {
 
   const registerTouchEvents = () => {
     console.log('registering touch events')
-    var elements = Array.from(document.getElementsByTagName('img'))
-    elements.forEach((el: any) => {
-      el.addEventListener("touchstart", dragStart, false)
-      el.addEventListener("touchend", dragEnd, false)
-      el.addEventListener("touchmove", dragDrop, false)
-    });
+    var elements = document.getElementsByTagName('img')
+    for(let i = 0 ; i < elements.length; i++){
+      const el = elements[i];
+      el.addEventListener("touchstart", dragStart)
+      el.addEventListener("touchmove", dragDrop)
+      el.addEventListener("touchend", dragEnd)
+    }
   }
 
   const createBoard = () => {
