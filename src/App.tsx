@@ -146,11 +146,12 @@ function App() {
   };
 
   const dragStart = (e: any) => {
-    setSquareBeingDragged(e.target);
+    console.log('drag start ...')
+    setSquareBeingDragged(e.target)
   };
 
   const dragDrop = (e: any) => {
-    setSquareBeingReplaced(e.target);
+    setSquareBeingReplaced(e.target)
   };
 
   const dragEnd = (e: any) => {
@@ -192,6 +193,16 @@ function App() {
     }
   };
 
+  const registerTouchEvents = () => {
+    console.log('registering touch events')
+    var elements = Array.from(document.getElementsByTagName('img'))
+    elements.forEach((el: any) => {
+      el.addEventListener("touchstart", dragStart, false)
+      el.addEventListener("touchend", dragEnd, false)
+      el.addEventListener("touchmove", dragDrop, false)
+    });
+  }
+
   const createBoard = () => {
     const randomColorArrangement = [];
     for (let i = 0; i < width * width; i++) {
@@ -201,9 +212,12 @@ function App() {
     }
     setCurrentColorArr(randomColorArrangement);
   };
+
   useEffect(() => {
-    createBoard();
+    createBoard()
+    registerTouchEvents()
   }, []);
+  
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -212,7 +226,7 @@ function App() {
       checkForColumnsOfThree();
       checkForRowOfThree();
       moveIntoSquareBelow();
-      setCurrentColorArr([...currentColorArr]);
+      setCurrentColorArr([...currentColorArr])
     }, 100);
 
     return () => clearInterval(timer);
@@ -223,7 +237,8 @@ function App() {
     checkForColumnsOfThree,
     currentColorArr,
     moveIntoSquareBelow,
-  ]);
+  ]); 
+
 
   return (
     <div className="app">
